@@ -1,8 +1,8 @@
 package backend;
 
 #if sys
-import sys.FileSystem;
-import sys.io.File;
+import backend.io.PsychFileSystem as FileSystem;
+import backend.io.PsychFile as File;
 #else
 import lime.utils.Assets;
 #end
@@ -61,7 +61,7 @@ class Mods
 			for (folder in FileSystem.readDirectory(modsFolder))
 			{
 				var path = haxe.io.Path.join([modsFolder, folder]);
-				if (sys.FileSystem.isDirectory(path) && !ignoreModFolders.contains(folder.toLowerCase()) && !list.contains(folder))
+				if (backend.io.PsychFileSystem.isDirectory(path) && !ignoreModFolders.contains(folder.toLowerCase()) && !list.contains(folder))
 					list.push(folder);
 			}
 		}
@@ -99,10 +99,7 @@ class Mods
 	inline public static function directoriesWithFile(path:String, fileToFind:String, mods:Bool = true)
 	{
 		var foldersToCheck:Array<String> = [];
-		#if sys
-		if(FileSystem.exists(path + fileToFind))
-		#end
-			foldersToCheck.push(path + fileToFind);
+		foldersToCheck.push(path + fileToFind);
 
 		#if MODS_ALLOWED
 		if(mods)

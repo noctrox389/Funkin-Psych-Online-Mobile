@@ -16,8 +16,8 @@ import lime.utils.Assets;
 import tjson.TJSON as Json;
 
 #if sys
-import sys.io.File;
-import sys.FileSystem;
+import backend.io.PsychFile as File;
+import backend.io.PsychFileSystem as FileSystem;
 #end
 
 import objects.AttachedSprite;
@@ -428,6 +428,8 @@ class ModsMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		FlxG.mouse.visible = true;
+
+		addTouchPad('UP_DOWN', 'B');
 
 		super.create();
 	}
